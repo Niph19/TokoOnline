@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Alamat;
+use App\Models\Pesanan;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -28,5 +30,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function alamat()
+    {
+        return $this->hasMany(Alamat::class);
+    }
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
     }
 }
