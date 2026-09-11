@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Middleware\cekRole;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
@@ -14,7 +13,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/dashboard-user', function () {
     return view('index');
-})->middleware(['auth', 'cekRole:user'])->name('dashboard-user');
+})->middleware(['auth', 'cek.Role:user'])->name('dashboard-user');
 
 
 Route::middleware('auth')->group(function () {

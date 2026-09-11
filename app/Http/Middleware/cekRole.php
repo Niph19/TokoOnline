@@ -14,12 +14,14 @@ class cekRole
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
-        $role = $request->Auth::class('role');
-        if (!$request->has('role') || $role === 'admin') {
-
-            return redirect('/dashboard-admin')->with(403, 'akses ditolak.');
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu.');
+        }
+        $userRole = Auth::user()->role;
+        if (!in_array($userRole, explode('|', $role))) {
+            abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk mengakses halaman ini.');
         }
         return $next($request);
     }
