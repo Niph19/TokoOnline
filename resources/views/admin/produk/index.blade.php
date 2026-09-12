@@ -1,0 +1,5 @@
+@extends('layouts.admin')
+@section('content')
+<div class="page-heading"><div><p class="eyebrow">INVENTARIS</p><h1>Kelola produk</h1></div><a class="button" href="{{ route('admin.produk.create') }}">Tambah Produk</a></div>
+<div class="admin-panel"><div class="table-wrap"><table><thead><tr><th>Produk</th><th>Harga</th><th>Stok</th><th>Aksi</th></tr></thead><tbody>@forelse ($produks as $produk)<tr><td><strong>{{ $produk->nama_produk }}</strong><small>{{ $produk->deskripsi }}</small></td><td>Rp {{ number_format($produk->harga, 0, ',', '.') }}</td><td>{{ $produk->stok }}</td><td class="table-actions"><a href="{{ route('admin.produk.edit', $produk) }}">Edit</a><form method="POST" action="{{ route('admin.produk.destroy', $produk) }}">@csrf @method('DELETE')<button type="submit" onclick="return confirm('Hapus produk ini?')">Hapus</button></form></td></tr>@empty<tr><td colspan="4" class="empty-state">Belum ada produk.</td></tr>@endforelse</tbody></table></div>{{ $produks->links() }}</div>
+@endsection
