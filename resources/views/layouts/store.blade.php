@@ -56,7 +56,7 @@
     <footer class="bg-white border-t border-[#E4E8F3] py-6 mt-auto">
         <div class="max-w-6xl mx-auto px-5 text-sm text-[#5B6472] flex items-center justify-between flex-wrap gap-2">
             <span class="font-['Space_Grotesk'] font-semibold text-[#0B1220]">BliBlaBle</span>
-            <span>Satu toko, semua yang kamu perlu.</span>
+            <span>&copy; 2023 BliBlaBle (Niph19). All rights reserved.</span>
         </div>
     </footer>
 </body>
