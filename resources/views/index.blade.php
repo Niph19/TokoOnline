@@ -28,7 +28,7 @@
 <section id="katalog" class="max-w-6xl mx-auto px-5 py-16">
     <div class="mb-8">
         <h2 class="font-['Space_Grotesk'] text-2xl font-semibold text-[#0B1220]">Produk pilihan</h2>
-        <p class="text-[#5B6472] text-sm mt-1">Semua yang tersedia di toko, tanpa perlu memilah kategori.</p>
+        <p class="text-[#5B6472] text-sm mt-1">Semua yang tersedia di toko.</p>
     </div>
 
     @if ($dataProduk->isEmpty())
