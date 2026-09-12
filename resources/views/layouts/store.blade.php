@@ -4,39 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Toko Kita' }} | Toko Kita</title>
+    <title>{{ $title ?? 'BliBlaBle' }} | BliBlaBle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="store-shell">
-    <header class="site-header">
-        <div class="container site-header__inner">
-            <a href="{{ route('landing') }}" class="brand">TOKO KITA <span>online store</span></a>
-            <nav class="site-nav" aria-label="Navigasi utama">
-                <a href="{{ route('landing') }}">Produk</a>
+<body class="min-h-screen flex flex-col bg-white text-[#0B1220] antialiased">
+
+    {{-- Navbar --}}
+    <header class="bg-white/90 backdrop-blur border-b border-[#E4E8F3] sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-6">
+            <a href="{{ route('landing') }}" class="flex items-center gap-2 font-['Space_Grotesk'] font-bold text-lg tracking-tight text-[#0B1220] no-underline">
+                <span class="w-8 h-8 bg-[#2451FF] text-white rounded-lg flex items-center justify-center text-xs font-bold">BB</span>
+                BliBlaBle
+            </a>
+            <nav class="flex items-center gap-1 text-sm">
+                <a href="{{ route('landing') }}" class="px-3 py-2 rounded-lg text-[#5B6472] font-medium hover:bg-[#F5F7FF] hover:text-[#2451FF] transition-colors">Produk</a>
                 @auth
                     @if (Auth::user()->role === 'admin')
-                        <a href="{{ route('admin.dashboard') }}">Panel Admin</a>
+                        <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 rounded-lg text-[#5B6472] font-medium hover:bg-[#F5F7FF] hover:text-[#2451FF] transition-colors">Panel Admin</a>
                     @else
-                        <a href="{{ route('pesanan.index') }}">Pesanan Saya</a>
+                        <a href="{{ route('pesanan.index') }}" class="px-3 py-2 rounded-lg text-[#5B6472] font-medium hover:bg-[#F5F7FF] hover:text-[#2451FF] transition-colors">Pesanan Saya</a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="link-button">Keluar</button>
+                        <button type="submit" class="px-3 py-2 rounded-lg text-[#5B6472] font-medium hover:bg-[#F5F7FF] hover:text-[#2451FF] transition-colors bg-transparent border-0 cursor-pointer text-sm">Keluar</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}">Masuk</a>
-                    <a class="button button--small" href="{{ route('register') }}">Daftar</a>
+                    <a href="{{ route('login') }}" class="px-3 py-2 rounded-lg text-[#5B6472] font-medium hover:bg-[#F5F7FF] hover:text-[#2451FF] transition-colors">Masuk</a>
+                    <a href="{{ route('register') }}" class="ml-1 px-4 py-2 bg-[#2451FF] text-white text-sm font-semibold rounded-lg hover:bg-[#17348F] transition-colors">Daftar</a>
                 @endauth
             </nav>
         </div>
     </header>
+
+    {{-- Flash messages --}}
     @if (session('success'))
-        <div class="container flash flash--success">{{ session('success') }}</div>
+        <div class="max-w-6xl mx-auto px-5 mt-4 w-full">
+            <div class="px-4 py-3 bg-[#F0FDF4] border border-[#BBF7D0] text-[#166534] rounded-lg text-sm font-medium">{{ session('success') }}</div>
+        </div>
     @endif
     @if (session('error'))
-        <div class="container flash flash--error">{{ session('error') }}</div>
+        <div class="max-w-6xl mx-auto px-5 mt-4 w-full">
+            <div class="px-4 py-3 bg-[#FEF2F2] border border-[#FECACA] text-[#991B1B] rounded-lg text-sm font-medium">{{ session('error') }}</div>
+        </div>
     @endif
-    <main>@yield('content')</main>
-    <footer class="site-footer"><div class="container">Toko Kita &middot; Belanja sederhana, pesanan terpantau.</div></footer>
+
+    <main class="flex-1">@yield('content')</main>
+
+    <footer class="bg-white border-t border-[#E4E8F3] py-6 mt-auto">
+        <div class="max-w-6xl mx-auto px-5 text-sm text-[#5B6472] flex items-center justify-between flex-wrap gap-2">
+            <span class="font-['Space_Grotesk'] font-semibold text-[#0B1220]">BliBlaBle</span>
+            <span>Satu toko, semua yang kamu perlu.</span>
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,30 +1,45 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'BliBlaBle') }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="antialiased">
+    <div class="min-h-screen grid md:grid-cols-2">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        {{-- Left: brand panel --}}
+        <div class="hidden md:flex flex-col justify-center bg-[#0A1435] text-white px-12 py-16 relative overflow-hidden">
+            <div class="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#2451FF]/15"></div>
+            <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-[#2451FF]/10"></div>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <div class="relative z-10">
+                <a href="/" class="flex items-center gap-2 mb-10 no-underline">
+                    <span class="w-11 h-11 bg-[#2451FF] rounded-xl flex items-center justify-center font-bold text-lg">BB</span>
+                    <span class="font-['Space_Grotesk'] text-2xl font-semibold tracking-tight">BliBlaBle</span>
                 </a>
+                <h1 class="font-['Space_Grotesk'] text-4xl font-semibold leading-tight mb-3">Satu toko,<br>semua kamu perlu.</h1>
+                <p class="text-white/65 text-base leading-relaxed mb-10 max-w-sm">Pilih produk, checkout dalam hitungan detik, dan pantau pesananmu sampai tiba di depan pintu.</p>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-1.5 h-1.5 rounded-full bg-[#2451FF] shrink-0"></span>Checkout cepat, tanpa akun ribet</li>
+                    <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-1.5 h-1.5 rounded-full bg-[#2451FF] shrink-0"></span>Status pesanan real-time</li>
+                    <li class="flex items-center gap-3 text-white/80 text-sm"><span class="w-1.5 h-1.5 rounded-full bg-[#2451FF] shrink-0"></span>COD atau transfer, kamu yang pilih</li>
+                </ul>
             </div>
+        </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        {{-- Right: form panel --}}
+        <div class="flex items-center justify-center px-6 py-12 bg-white">
+            <div class="w-full max-w-sm">
                 {{ $slot }}
             </div>
         </div>
-    </body>
+
+    </div>
+</body>
 </html>

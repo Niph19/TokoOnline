@@ -37,8 +37,10 @@ class PesananController extends Controller
             'bukti_pembayaran' => ['nullable', 'required_if:tipe,transfer', 'image', 'max:2048'],
         ]);
 
-        if ($data['alamat_id']) {
-            abort_unless(Alamat::whereKey($data['alamat_id'])->where('user_id', Auth::id())->exists(), 403);
+        $alamatId = $data['alamat_id'] ?? null;
+
+        if ($alamatId) {
+            abort_unless(Alamat::whereKey($alamatId)->where('user_id', Auth::id())->exists(), 403);
         } else {
             $alamat = Alamat::create([
                 'user_id' => Auth::id(),
@@ -48,11 +50,12 @@ class PesananController extends Controller
                 'provinsi' => $data['provinsi'],
                 'kode_pos' => $data['kode_pos'],
             ]);
-            $data['alamat_id'] = $alamat->id;
+            $alamatId = $alamat->id;
         }
 
         $data['user_id'] = Auth::id();
         $data['produk_id'] = $produk->id;
+        $data['alamat_id'] = $alamatId;
         $data['total_harga'] = $produk->harga * $data['kuantitas'];
         $data['status'] = 'Menunggu Pembayaran';
         unset($data['alamat'], $data['kecamatan'], $data['kota'], $data['provinsi'], $data['kode_pos']);
