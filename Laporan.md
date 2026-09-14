@@ -1,0 +1,2 @@
+Laporan:
+Setelah saya cek dan analisis menggunakan Laravel DebugBar pada projek BliBluBLe (Toko Online) saya, tidak ada n+1 problem, dikarenakan query saya menggunakan eager loading dengan syntax with()
